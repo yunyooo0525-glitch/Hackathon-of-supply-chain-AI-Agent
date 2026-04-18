@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material Tracer</title>
+    <!-- Use Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Unicons for icons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Marked.js for AI markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="background-effects">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="uil uil-cube"></i>
+                <h1>Material Tracer</h1>
+            </div>
+            <p class="subtitle">Discover the origin of your product's raw materials</p>
+        </header>
+
+        <section class="controls glass-card">
+            <div class="input-group">
+                <label for="companySelect"><i class="uil uil-building"></i> Select Company</label>
+                <div class="select-wrapper">
+                    <select id="companySelect">
+                        <option value="" disabled selected>Loading companies...</option>
+                    </select>
+                    <i class="uil uil-angle-down arrow-icon"></i>
+                </div>
+            </div>
+
+            <div class="input-group disabled" id="productGroup">
+                <label for="productSelect"><i class="uil uil-box"></i> Select Product</label>
+                <div class="select-wrapper">
+                    <select id="productSelect" disabled>
+                        <option value="" disabled selected>Select a company first...</option>
+                    </select>
+                    <i class="uil uil-angle-down arrow-icon"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="resultsArea" class="results-area hidden">
+            <h2 class="results-title"><i class="uil uil-analytics"></i> Trace Results</h2>
+            <div id="resultsContent" class="results-grid">
+                <!-- Results will be injected here by app.js -->
+            </div>
+        </section>
+        
+        <div id="emptyState" class="empty-state">
+            <i class="uil uil-search-alt"></i>
+            <p>Select a product to view its composition and suppliers.</p>
+        </div>
+    </div>
+
+    <script src="app.js?v=7"></script>
+</body>
+</html>
