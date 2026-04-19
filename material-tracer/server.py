@@ -107,8 +107,8 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                         generic_material_name = parts[2]
                 
                 prompt = (
-                    f"你是一个专业的供应链分析 AI 助手，并且已连入整个互联网。\n"
-                    f"用户正在为原材料 `{material_sku}` 寻找合适的替代方案。\n\n"
+                    f"You are a professional supply chain AI assistant connected to the internet.\n"
+                    f"The user is looking for alternatives for the raw material `{material_sku}` .\n\n"
                 )
                 
                 if is_fg and website_name and product_code:
@@ -116,38 +116,38 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                     scraped_info = scrape_ext_info(f"{website_name} {product_code} supplement details")
                     google_url = f"https://www.google.com/search?q={urllib.parse.quote_plus(website_name + ' ' + product_code + ' supplement details')}"
                     prompt += (
-                        f"【产品功能逆向工程指令】:\n"
-                        f"该原料正在被用于终端成品 `{parent_product_sku}` 中。\n"
-                        f"该成品的 SKU 表明它来源于 `{website_name}`，ID 为 `{product_code}`。\n"
-                        f"通过后台爬虫实时抓取该外网商品（参考检索来源：{google_url}）获得的核心介绍如下：\n"
+                        f"[Product Function Reverse Engineering Instructions]:\n"
+                        f"This raw material is being used in the finished product `{parent_product_sku}` 中。\n"
+                        f"The SKU of this finished product indicates it originates from `{website_name}`, with ID `{product_code}`。\n"
+                        f"The core introduction obtained via real-time web scraping from the external product page (Reference query: {google_url}) is as follows:\n"
                         f"『{scraped_info}』\n"
-                        f"1. 请仔细阅读上述真实爬取的商品文本来明确这款产品的真身及其作用。\n"
-                        f"2. 然后深度推断出原材料 `{material_sku}` 在该具体成品的配方工艺中扮演的具体角色（绝对不要笼统答复生理基础知识）。\n\n"
+                        f"1. Please carefully read the scraped product text to understand what this product is and its primary function.\n"
+                        f"2. Then deeply infer the specific role that the raw material `{material_sku}` plays in this specific product's formulation/manufacturing process (Do NOT give generic physiological knowledge).\n\n"
                     )
                 elif generic_material_name:
                     prompt += (
-                        f"【原材料特性检索指令】:\n"
-                        f"该材料是一项直接查询的基础原料。从其 SKU 中提取出的核心成分标识为 `{generic_material_name}`。\n"
-                        f"1. 请结合你的知识库，或者使用 Google Search 查阅 `{generic_material_name}` 的一般工业/医药用途。\n"
-                        f"2. 深度思考该材质在制造领域的主要功能，并以此作为基准来挑选替代品。\n\n"
+                        f"[Raw Material Properties Search Instructions]:\n"
+                        f"This material is a directly queried basic raw material. The core component extracted from its SKU is `{generic_material_name}`。\n"
+                        f"1. Please use your knowledge base or Google Search to review the generic industrial/medical uses of `{generic_material_name}` .\n"
+                        f"2. Deeply consider the primary function of this material in manufacturing, and use this as a baseline to select alternatives.\n\n"
                     )
 
                 prompt += (
-                    f"【判断与输出规则】:\n"
-                    f"1. 深刻理解原材料在产品**配方/工艺级别**的【核心功能】后，在数据库中寻找能够**完美替代这一功能**的原料。\n"
-                    f"2. 替代品也最好出现在类似产品的 BOM（物料清单）中。\n"
-                    f"3. 尽可能多地列出具体的替代原材料 SKU。对于每一个选出的 SKU，必须准确写出**为该 SKU 供货的供应商（Supplier）**，请从 `Supplier_Product` 表中寻找对应关系，**绝对不要**写出所属或购买该原料的公司（Company）。\n"
-                    f"4. 强制执行：如果你依赖了我提供的外部搜索文本或者你调用了内置的 Google Grounding 进行判断，请**务必在引述该证据的整句末尾当场打上对应的 Markdown 行内锚点角标**（例如：对视力起保护作用`[1](https://具体的真实URL)`），不要集中堆砌到文末。\n\n"
-                    f"【全局数据库 JSON（从中挑选替代品）】:\n"
+                    f"[Judgment & Output Rules]:\n"
+                    f"1. After profoundly understanding the raw material's [core function] at the **formulation/process level**, search the database for a raw material that can **perfectly substitute this function**.\n"
+                    f"2. The alternative should ideally appear in the BOM (Bill of Materials) of similar products.\n"
+                    f"3. Core Task: Carefully rank ALL database candidates by **degree of functional similarity** to the original material's specific role in this formulation. Then output **only the TOP 10 most functionally equivalent SKUs** — prioritizing those that are the most precise drop-in substitute (same chemical family, same delivery form, same intended function). For each selected SKU, you must accurately state the **Supplier** that provides this SKU by identifying the relationship in the `Supplier_Product` table. **NEVER** write down the Company that owns or buys the raw material.\n"
+                    f"4. MUST ENFORCE: If you relied on the external search snippet I provided or called the built-in Google Grounding parameter, you **MUST append a Markdown inline superscript hyperlink strictly at the end of the sentence where you cited it** (e.g., provides antioxidant effects`[1](https://actual_url)`). Do NOT aggregate referencing links into a separate list at the bottom.\n\n"
+                    f"[Global Database JSON (Select Alternatives from here)]:\n"
                     f"{db_data_text}\n\n"
-                    f"请基于上述背景调查和本地数据库，务必完整思考并输出。按照以下精简的 Markdown 格式输出（请使用中文，可以有多项）：\n\n"
-                    f"### 🔍 溯源与处方工艺寻源解读\n"
-                    f"[此处详细输出你对该成品配方的理解，并明确判定 {material_sku} 在产品配方中起到的物理/化学或有效成分作用。不要大段背诵生物学常识。]\n\n"
-                    f"### 替代选项 1：[必须是一个具体的替代原料 SKU，不可写成分泛称]\n"
-                    f"- **对接供应商 (Supplier)**: [列出数据库中能为该具体 SKU 供货的真实供应商名称]\n"
-                    f"- **工艺级推荐理由**: [说明该替换料在理化性质和制剂工艺上为何能平替原物料]\n\n"
-                    f"### 替代选项 2：[必须是一个具体的替代原料 SKU]\n"
-                    f"...(以此类推，请列出尽可能多的具体 SKU)"
+                    f"Based on the background investigation and local database, please think thoroughly and output exactly in the following concise Markdown format (Please use English, max 10 options):\n\n"
+                    f"### 🔍 Origin & Formulation Process Analysis\n"
+                    f"[Output detailed understanding of the formulation here, and definitively explicitly determine the physical/chemical or active role {material_sku} plays in the product formulation. Do not just recite biological common knowledge.]\n\n"
+                    f"### Alternative Option 1: [MUST be a specific alternative raw material SKU, do not use generic component terms]\n"
+                    f"- **Target Supplier**: [List the real supplier name from the database capable of supplying this specific SKU]\n"
+                    f"- **Process-level Recommendation Reason**: [Explain why this substitute can act as a drop-in replacement in terms of physicochemical properties and formulation processes]\n\n"
+                    f"### Alternative Option 2: [MUST be a specific alternative raw material SKU]\n"
+                    f"...(and so on, maximum 10 options total, ranked from most to least functionally similar)"
                 )
                 
                 credentials = service_account.Credentials.from_service_account_file(
@@ -165,7 +165,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                     "generationConfig": {"temperature": 0.2}
                 }
                 
-                # 成品溯源已经自带外网爬取脚本文本。只有针对独立的原材料查询，才开启内置的联网搜索辅助大模型
+                # Finished product trace brings external scraped script text. Only turn on built-in internet search grounding model for independent raw material query
                 if not is_fg:
                     payload["tools"] = [{"googleSearch": {}}]
                 
@@ -179,11 +179,11 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                     except Exception:
                         pass
                         
-                    # 针对大模型由于 Grounding 失败返回空文本的情况启动热回退策略
+                    # Hot fallback strategy for LLM returning empty text due to Grounding failure
                     if not ai_text.strip():
-                        # 去掉强制搜索工具，降级纯模型推理
+                        # Remove forced search tool, downgrade to pure model inference
                         payload.pop("tools", None)
-                        fallback_prompt = prompt + "\n\n【紧急回退注意】：因为防火墙或参数异常，联网查明产品具体形态失败。请直接将该终端产品假想为一款“典型的含有该物料的胶囊/压片/健康补剂”，然后推理出该成分在这类假想产品配方里的制剂学或营养学用途（一定要具体到应用场景中），再去数据库中挑选能够满足该处方工艺的替代 SKU 及对应的源头供应商！"
+                        fallback_prompt = prompt + "\n\n[URGENT FALLBACK]: Network search failed. Please imagine the product as a 'typical capsule/tablet/health supplement containing this material', then deeply infer its formulation/nutritional use in this hypothetical context, and select corresponding replacement SKUs and suppliers from the database!"
                         payload["contents"][0]["parts"][0]["text"] = fallback_prompt
                         response_fallback = requests.post(url, headers=headers, json=payload)
                         if response_fallback.status_code == 200:
@@ -193,7 +193,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                             except Exception:
                                 pass
                             if not ai_text.strip():
-                                ai_text = "AI Response error: API 最终返回了空响应，这可能是由于平台针对此关键词的安全拦截策略。"
+                                ai_text = "AI Response error: API returned an empty response, likely due to safety intercept policies on the platform."
                         else:
                             ai_text = f"Fallback API Error: {response_fallback.text}"
                     
@@ -208,7 +208,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                     if extracted_urls:
                         unique_urls = list(dict.fromkeys(extracted_urls))
                         url_list = "\n".join([f"> 🔗 [{u}]({u})" for u in unique_urls[:4]])
-                        ai_text += f"\n\n### 📚 辅助决策搜寻与检索凭证\n{url_list}"
+                        ai_text += f"\n\n### 📚 Auxiliary Search & Retrieval Evidence\n{url_list}"
 
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json')
@@ -250,28 +250,30 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                         # Again extract the original product description to understand constraints
                         product_intro = scrape_ext_info(f"{website_name} {product_code} supplement details")
                 
-                # 将 alternatives_context 裁剪到最多 4000 字，防止 Token 超限导致裁断
-                trimmed_context = alternatives_context[:4000] + ("…(内容已经过大裁剪)" if len(alternatives_context) > 4000 else "")
+                # Trim alternatives context to 4000 chars max to prevent Token overflow
+                trimmed_context = alternatives_context[:150000] + ("…(content truncated due to length)" if len(alternatives_context) > 150000 else "")
                 
                 compliance_prompt = (
-                    f"【注意】：请直接输出报告内容，不要任何自我介经、开场白或重复用户的话。\n\n"
-                    f"【任务】你是一名高级原料合规审查师。请对以下候选原料进行严格的二次法规与质量过滤。直接开始输出实质性报告尚表。\n\n"
-                    f"【终端成品】`{parent_product_sku}`\n"
-                    f"公网爬取到的产品介绍：『{product_intro}』\n\n"
-                    f"【候选原料摘要】（前一步生成的候选名单）：\n{trimmed_context}\n\n"
-                    f"【审查准则】：\n"
-                    f"1. 所有原料必须满足 Food-Grade 食品级基础要求。\n"
-                    f"2. 根据抓取的产品介绍，识别并强制执行 Organic/Vegan/Gluten-Free/Non-GMO 等特殊要求。\n"
-                    f"3. 对不符合的候选一律淘汰，对幸存者说明代表供应商对应质量标准。\n"
-                    f"4. 如果匹配多个，直接当成多项列出、不强求唯一。\n"
-                    f"5. 全局硬性格式要求：在你断言一个合规事实（例如判定某种物质不属于纯素、或者符合无麸质标准时），一旦调用了谷歌搜索，必须精确地在其句末直接接上 Markdown 格式网址角标：如 `[1](https://来源网址)` 进行溯源。\n\n"
-                    f"输出格式（Markdown）：\n"
-                    f"### 📋 产品终端合规基准识别\n"
-                    f"[1-3句总结强制质量要求。勿过多描述。]\n\n"
-                    f"### 🚫 淘汰名单\n"
-                    f"[列出被否决的 SKU + 一句话说明为什么淘汰]\n\n"
-                    f"### 🏆 最终合规放行推荐\n"
-                    f"[列出幸存的 SKU + 对接供应商 + 一句话合规理由]\n"
+                    f"[NOTE]: Please output the report content directly, without any self-introduction, opening remarks, or echoing the user.\n\n"
+                    f"[Task] You are a Senior Ingredient Compliance Auditor. Please conduct a strict secondary regulatory and quality screening on the following candidate raw materials. Begin outputting the substantive report immediately.\n\n"
+                    f"[Finished Product]`{parent_product_sku}`\n"
+                    f"Scraped product introduction from the public web: '{product_intro}'\n\n"
+                    f"[Candidate Raw Materials Summary] (Candidate list generated from previous step):\n{trimmed_context}\n\n"
+                    f"[Auditing Guidelines]:\n"
+                    f"1. All incoming raw materials must satisfy Food-Grade baseline quality requirements.\n"
+                    f"2. Identify and forcefully enforce specific requirements (e.g. Organic, Vegan, Gluten-Free, Non-GMO) based on the scraped product overview.\n"
+                    f"3. Strict Legal & Purity Filtering (FDA GRAS & USP): You must verify if the underlying active chemical compound is FDA GRAS and meets USP heavy metal limits. Furthermore, since this is a premium supplement, enforce a **Bioavailability Hierarchy**: completely disqualify cheap, low-absorption chemical forms like 'carbonate' or 'oxide', and heavily favor premium forms like 'citrate', 'malate', or 'gluconate'. If it is an industrial cheap form, reject it immediately.\n"
+                    f"4. If multiple candidates pass, list them all natively. Do not force uniqueness.\n"
+                    f"5. **INLINE CITATION ENFORCEMENT (CRITICAL RULE — DO NOT VIOLATE)**: Every single time you invoke Google Search and use it to support a compliance claim, you MUST immediately append the citation **on the same line, directly after the sentence that relies on it**, using the format `[N](https://actual_url)` where N is a sequential integer starting from 1. Example of CORRECT behavior: 'Calcium Citrate is listed on the FDA GRAS list`[1](https://www.fda.gov/...)`and also meets USP monograph purity`[2](https://www.usp.org/...)`.' NEVER collect citations into a reference list at the bottom. NEVER leave any claim unsupported if you used search for it.\n\n"
+                    f"Output Format (Markdown):\n"
+                    f"### 📋 Product Terminal Compliance Baseline\n"
+                    f"[Summarize mandated quality requirements in 1-3 sentences. Do not be overly verbose.]\n\n"
+                    f"### 🚫 Disqualified Candidates\n"
+                    f"[List disqualified SKUs. If none were disqualified, write 'None.' Do NOT leave this section blank.]\n\n"
+                    f"### 🏆 Final Compliant Approvals\n"
+                    f"CRITICAL: You MUST list every approved candidate here. Each entry MUST start with the exact SKU code in the format `RM-XXXX-XXXX-XXXX` (copy it exactly from the candidate list). Format each entry as:\n"
+                    f"- **SKU**: `RM-C1-example-abc12345` | **Supplier**: [Supplier Name] | [One-sentence compliance reason]\n"
+                    f"If no candidates were disqualified, ALL candidates from the input list must appear here. An empty approvals section is NEVER acceptable."
                 )
                 
                 credentials = service_account.Credentials.from_service_account_file(
@@ -307,7 +309,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                     if extracted_urls:
                         unique_urls = list(dict.fromkeys(extracted_urls))
                         url_list = "\n".join([f"> 🔗 [{u}]({u})" for u in unique_urls[:4]])
-                        ai_text += f"\n\n### 📚 合规法务及标准查阅来源\n{url_list}"
+                        ai_text += f"\n\n### 📚 Compliance Legal & Standard Sources\n{url_list}"
 
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json')
@@ -337,7 +339,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                 with open('data.json', 'r', encoding='utf-8') as f:
                     db = json.load(f)
 
-                # ── 1. 找到目标公司 & 其所有 RM ──────────────────────────
+                # ── 1. Find target company & all RM ──────────────────────────
                 fg_product = next((p for p in db['Product'] if p['SKU'] == parent_product_sku), None)
                 company_id = fg_product['CompanyId'] if fg_product else None
                 company_name = next((c['Name'] for c in db['Company'] if c['Id'] == company_id), 'Unknown') if company_id else 'Unknown'
@@ -348,7 +350,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                 ) if company_id else set()
                 total_rm = len(company_rm_ids)
 
-                # ── 2. 找到原始原料 & 其供应商 ───────────────────────────
+                # ── 2. Find original RM & suppliers ───────────────────────────
                 orig_product = next((p for p in db['Product'] if p['SKU'] == material_sku), None)
                 orig_prod_id = orig_product['Id'] if orig_product else None
 
@@ -358,17 +360,17 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
 
                 orig_suppliers = get_suppliers_for_product(orig_prod_id) if orig_prod_id else []
 
-                # ── 3. 计算每个供应商的合并分 ─────────────────────────────
+                # ── 3. Calculate consolidation score for each supplier ─────────────────────────────
                 def consolidation_score(supplier_id):
                     sup_product_ids = set(sp['ProductId'] for sp in db['Supplier_Product'] if sp['SupplierId'] == supplier_id)
                     overlap = len(sup_product_ids & company_rm_ids)
                     rate = overlap / total_rm if total_rm else 0
                     return round(rate * 45, 1), overlap
 
-                # ── 4. 仅提取合规放行区域(🏆后)的 SKU，过滤掉淘汰区的 SKU
+                # ── 4. Extract only SKUs from the compliant approval zone (after 🏆), filter out disqualified SKUs
                 import re
                 
-                # 找到"最终合规放行推荐"或 🏆 所在行，只取其后的内容
+                # Find 'Final Compliant Approvals' or 🏆 line, take only the following content
                 approved_section = ""
                 lines_report = compliant_report.split('\n')
                 in_approved = False
@@ -378,18 +380,18 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                     if in_approved:
                         approved_section += line + '\n'
                 
-                # 如果没有找到任何放行区域，只保留原始原料
+                # If no approval zones found, keep original RM only
                 if approved_section:
                     found_skus = re.findall(r'RM-[A-Za-z0-9_-]+', approved_section)
                 else:
                     found_skus = []
-                found_skus = list(dict.fromkeys(found_skus))  # 去重保序
+                found_skus = list(dict.fromkeys(found_skus))  # Deduplicate preserving order
 
-                # 构建候选列表：含原始 SKU + 合规通过的替代品
+                # Build candidate list: original SKU + compliant alternatives
                 candidate_skus = [material_sku] + [s for s in found_skus if s != material_sku]
-                candidate_skus = candidate_skus[:12]  # 最多 12 个候选，防止 token 爆炸
+                candidate_skus = candidate_skus[:12]  # Max 12 candidates to prevent token explosion
 
-                # ── 5. 直接爬 PureBulk 产品搜索页抓真实价格 ──────────────
+                # ── 5. Directly scrape PureBulk product search page for real prices ──────────────
                 def scrape_price(supplier_name, material_name):
                     try:
                         slug = urllib.parse.quote_plus(material_name.replace('-', ' '))
@@ -401,19 +403,19 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                         html = urllib.request.urlopen(req, timeout=6).read().decode('utf-8')
                         prices = re.findall(r'\$[\d,]+\.\d{2}', html)
                         if prices:
-                            # 过滤掉明显是大包装的超高价格（>200），取最低零售单价作参考
+                            # Filter out obvious bulk high prices (>200), use lowest retail price as reference
                             price_vals = sorted(set(float(p.replace('$','').replace(',','')) for p in prices))
                             relevant = [p for p in price_vals if 1 < p < 500]
                             if relevant:
-                                return f"PureBulk 参考价: ${relevant[0]:.2f}起（多规格，最低单价）"
+                                return f"PureBulk Ref Price: ${relevant[0]:.2f} up (multi-spec, lowest price)"
                     except Exception:
                         pass
-                    # 回退：Alibaba DuckDuckGo 片段
+                    # Fallback: Alibaba DuckDuckGo snippet
                     fallback = scrape_ext_info(f"{material_name} bulk price per kg USD 2024")
-                    return fallback[:200] if fallback else "未找到公开价格"
+                    return fallback[:200] if fallback else "Public price not found"
 
 
-                # ── 6. 构建结构化候选数据 ─────────────────────────────────
+                # ── 6. Build structured candidate data ─────────────────────────────────
                 candidate_rows = []
                 for sku in candidate_skus:
                     prod = next((p for p in db['Product'] if p['SKU'] == sku), None)
@@ -421,7 +423,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                         continue
                     sups = get_suppliers_for_product(prod['Id'])
                     is_original = (sku == material_sku)
-                    # 从 SKU 推断化学通用名
+                    # Infer chemical generic name from SKU
                     parts = sku.split('-')
                     chem_name = ' '.join(parts[2:-1]) if len(parts) >= 4 else sku
 
@@ -435,45 +437,45 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                             'chem_name': chem_name,
                             'consolidation_score': con_score,
                             'overlap_count': overlap_count,
-                            'price_info': price_info[:300] if price_info else '未找到公开价格'
+                            'price_info': price_info[:300] if price_info else 'Public price not found'
                         })
 
-                # 按 is_original 优先，再按合并分排序
+                # Sort primarily by is_original, then by consolidation score
                 candidate_rows.sort(key=lambda x: (-int(x['is_original']), -x['consolidation_score']))
-                candidate_rows = candidate_rows[:15]  # 最多 15 行
+                candidate_rows = candidate_rows[:15]  # Max 15 rows
 
-                # 构建结构化上下文
+                # Build structured context
                 rows_text = "\n".join([
-                    f"{'[原始]' if r['is_original'] else '[替代]'} SKU={r['sku']} | 供应商={r['supplier']} | "
-                    f"已为该公司供{r['overlap_count']}/{total_rm}种原料(合并分{r['consolidation_score']}/45) | "
+                    f"{'[Original]' if r['is_original'] else '[Alternative]'} SKU={r['sku']} | Supplier={r['supplier']} | "
+                    f"Supplied {r['overlap_count']}/{total_rm} RM for this company (Score {r['consolidation_score']}/45) | "
                     f"价格情报: {r['price_info']}"
                     for r in candidate_rows
                 ])
 
                 scoring_prompt = (
-                    f"【禁止自我介绍，直接输出报告】\n\n"
-                    f"你是一位采购优化专家。请根据以下系统预计算的结构化数据，对候选原料进行最终打分排名。\n\n"
-                    f"【背景】\n"
-                    f"公司: {company_name} | 需求量: {quantity_kg} 千克/月\n"
-                    f"原料: {material_sku} | 该公司共有 {total_rm} 种原材料\n\n"
-                    f"【候选列表（含系统预算的合并分）】\n"
+                    f"[Do not introduce yourself, output report directly]\n\n"
+                    f"You are a procurement optimization expert. Please rank the candidate raw materials based on the pre-calculated structured data below.\n\n"
+                    f"[Background]\n"
+                    f"Company: {company_name} | Demand: {quantity_kg} kg/month\n"
+                    f"Raw Material: {material_sku} | This company has a total of {total_rm} raw materials\n\n"
+                    f"[Candidate List (incl. pre-calculated consolidation scores)]\n"
                     f"{rows_text}\n\n"
-                    f"【打分规则】\n"
-                    f"- 价格分(40分): 从价格情报中估算单价，最便宜=40，其余按比例，无法判断=20\n"
-                    f"- 合并分(45分): 已由系统算好，直接使用\n"
-                    f"- 规模适配分(15分): 根据 {quantity_kg}kg/月需求 + 供应商性质判断(工业级=15, 零售级=5, 未知=10)\n"
-                    f"- 总分 = 三项之和\n\n"
-                    f"【输出格式】\n"
-                    f"### 🏆 最优寻源打分排名\n"
-                    f"| 排名 | SKU | 供应商 | 估算单价 | 合并分 | 价格分 | 规模分 | **总分** |\n"
-                    f"|------|-----|--------|----------|--------|--------|--------|----------|\n"
-                    f"(填入所有候选行，按总分从高到低)\n\n"
-                    f"### 🥇 最终推荐\n"
-                    f"[1-2句：推荐哪个SKU+供应商，核心理由]\n\n"
-                    f"### 📈 供应链整合机会\n"
-                    f"[1-2句：如果选择该供应商，可以合并哪些其他原料的采购，整合潜力如何]\n\n"
+                    f"[Scoring Rules]\n"
+                    f"- Price Score (40 pts): Estimate unit price from intel, cheapest=40, scaled, unknown=20\n"
+                    f"- Consolidation Score (45 pts): Pre-calculated, use directly\n"
+                    f"- Scale Fit Score (15 pts): Evaluate based on {quantity_kg}kg/mo demand + supplier type (Industrial=15, Retail=5, Unknown=10)\n"
+                    f"- Total Score = Sum of three\n\n"
+                    f"[Output Format]\n"
+                    f"### 🏆 Optimal Sourcing Score Ranking\n"
+                    f"| Rank | SKU | Supplier | Est. Price | Consol Score | Price Score | Scale Score | **Total Score** |\n"
+                    f"|------|-----|----------|------------|--------------|-------------|-------------|-----------------|\n"
+                    f"(Fill in all candidate rows, sorted by Total Score from highest to lowest)\n\n"
+                    f"### 🥇 Final Recommendation\n"
+                    f"[1-2 sentences: Which SKU + Supplier do you recommend, and what is the core reason?]\n\n"
+                    f"### 📈 Supply Chain Consolidation Opportunity\n"
+                    f"[1-2 sentences: If this supplier is chosen, what other raw materials can be consolidated, and what is the integration potential?]\n\n"
                     f"---\n"
-                    f"*TODO (未来整批次优化): /api/optimize-company-sourcing — 对 {company_name} 全部 {total_rm} 种原料一键输出最小供应商组合方案*"
+                    f"*TODO (Future Batch Optimization): /api/optimize-company-sourcing — One-click output of the minimal supplier combination for all {total_rm} materials of {company_name}*"
                 )
 
                 credentials = service_account.Credentials.from_service_account_file(
@@ -671,15 +673,30 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                                     alts = sup_to_alts.get((sr['supplier'], rm_sku), set())
                                     if alts:
                                         target_skus.add(sorted(alts)[0])
-                                g_set.append({'supplier': sr['supplier'] + ' (备选补齐)', 'covers': sorted(target_skus)})
+                                g_set.append({'supplier': sr['supplier'] + ' (Fallback Supplement)', 'covers': sorted(target_skus)})
                                 temp_unc -= newly
                             if not temp_unc:
                                 break
+                    
+                    # Final safety net: any RM still uncovered (no supplier found via greedy)
+                    # gets inserted directly using its first compliant alt entry
+                    if temp_unc:
+                        for rm_sku in sorted(temp_unc):
+                            alts = rm_compliant_map.get(rm_sku, [])
+                            if alts:
+                                first_alt = alts[0]
+                                supplier = first_alt.get('suppliers', ['Unknown Supplier'])[0] if first_alt.get('suppliers') else 'Unknown Supplier'
+                                sku = first_alt.get('sku', rm_sku)
+                            else:
+                                supplier = 'Unknown Supplier'
+                                sku = rm_sku
+                            g_set.append({'supplier': f'{supplier} (Direct Fallback)', 'covers': [sku]})
+                    
                     return g_set
 
                 plan1 = {
-                    'name': '方案一：极致精简组合（最低管理成本）',
-                    'desc': '按照数学贪心算法优先选择覆盖面最广的供货商，大幅减少采购对接对象。',
+                    'name': 'Plan 1: Extreme Consolidation (Min. Mgmt Cost)',
+                    'desc': 'Prioritizes suppliers with the broadest coverage based on a greedy mathematical algorithm, drastically reducing the number of procurement contacts.',
                     'steps': compute_greedy()
                 }
                 
@@ -688,16 +705,16 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                 if len(supplier_rankings) > 1:
                     top_supp = supplier_rankings[0]['supplier']
                     final_plans.append({
-                        'name': f'方案二：韧性备选组合（规避重度依赖）',
-                        'desc': f'剔除覆盖面最大的头号供应商 ({top_supp}) 强行去中心化的策略，防止单点断供卡脖子。',
+                        'name': f'Plan 2: Resilient Distributed (Risk Mitigation)',
+                        'desc': f'A forced decentralization strategy removing the absolute top supplier ({top_supp}) to prevent single-point supply chain gridlocks.',
                         'steps': compute_greedy(exclude_suppliers={top_supp})
                     })
                 
                 if len(supplier_rankings) > 2:
                     top2 = {supplier_rankings[0]['supplier'], supplier_rankings[1]['supplier']}
                     final_plans.append({
-                        'name': '方案三：多源分散组合（多元化采买）',
-                        'desc': '故意避开排名前两位的头部大厂，强制引入更多中小供应商，适用于测试二级备用供应链网络。',
+                        'name': 'Plan 3: Multi-Source Diversification',
+                        'desc': 'Intentionally sidestepping the top two mega-suppliers to forcefully inject more niche/SMB suppliers, ideal for establishing secondary alternative networks.',
                         'steps': compute_greedy(exclude_suppliers=top2)
                     })
 
@@ -721,7 +738,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                     'rm_matrix': matrix,
                     'supplier_rankings': supplier_rankings,
                     'purchasing_plans': final_plans,
-                    'ai_analysis': "此矩阵所有替代项均已由各前端进程通过单物料深度分析与合规测试筛选而得。"
+                    'ai_analysis': "All replacement items in this matrix have been rigorously filtered through individual material deep-diving and compliance testing by concurrent processes."
                 }, ensure_ascii=False).encode('utf-8'))
 
             except Exception as e:

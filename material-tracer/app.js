@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const companyName = companySelect.options[companySelect.selectedIndex].text;
         consolidationPanel.innerHTML = `
             <button class="consolidation-btn" id="company-consolidate-btn">
-                🔗 全公司原材料 × 供应商整合分析（${companyName}）
+                🔗 Full Company Raw Materials × Supplier Consolidation Analysis（${companyName}）
             </button>
             <div id="consolidation-result" class="hidden"></div>
         `;
@@ -81,9 +81,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const btn = document.getElementById('company-consolidate-btn');
             const resultDiv = document.getElementById('consolidation-result');
             btn.disabled = true;
-            btn.textContent = '⏳ 首先读取图谱并行分析中...';
+            btn.textContent = '⏳ Reading Graph and Running Parallel Analysis...';
             resultDiv.classList.remove('hidden');
-            resultDiv.innerHTML = '<div class="ai-loader"><i class="uil uil-spinner-alt ai-spin"></i> 正在读取全公司成分矩阵...</div>';
+            resultDiv.innerHTML = '<div class="ai-loader"><i class="uil uil-spinner-alt ai-spin"></i> Reading full company component matrix...</div>';
 
             try {
                 // Phase 1: Get all RMs
@@ -97,19 +97,19 @@ document.addEventListener('DOMContentLoaded', async () => {
                 
                 const rmEntries = listJson.rm_entries;
                 if (!rmEntries || rmEntries.length === 0) {
-                    resultDiv.innerHTML = '<span>无需分析，未查到原材料数据。</span>';
+                    resultDiv.innerHTML = '<span>No analysis needed, raw material data not found.</span>';
                     return;
                 }
 
                 // Render Progress UI
                 let progressHtml = `<div style="margin-bottom:1.5rem">
-                    <h3 style="color:#a78bfa;margin-bottom:0.75rem">🚀 分布式 AI 分析管道启航 (共 ${rmEntries.length} 项)</h3>
-                    <div style="font-size:0.85rem;color:#8b8d96;margin-bottom:1rem">为避免幻觉并确保 100% 合规，系统正逐一深度探究每种原材料！</div>
+                    <h3 style="color:#a78bfa;margin-bottom:0.75rem">🚀 Distributed AI Analysis Pipeline Initiated (Total: ${rmEntries.length} Items)</h3>
+                    <div style="font-size:0.85rem;color:#8b8d96;margin-bottom:1rem">To eliminate hallucinations and ensure 100% compliance, the system is deeply investigating each raw material individually!</div>
                     <div id="progress-list" style="max-height: 250px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;">`;
                 
                 rmEntries.forEach((rm, i) => {
                     progressHtml += `<div id="status-rm-${i}" style="margin-bottom:0.4rem;font-size:0.85rem;">
-                        <span class="status-badge" style="background:#555;padding:2px 6px;border-radius:4px;font-size:0.7rem;color:#fff;">排队中</span> 
+                        <span class="status-badge" style="background:#555;padding:2px 6px;border-radius:4px;font-size:0.7rem;color:#fff;">Queued</span> 
                         <code style="color:#a5f3fc">${rm.rm_sku}</code> 
                         (${rm.chem_name})
                     </div>`;
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     
                     try {
                         // 1. Suggest Alternatives
-                        statusEl.innerHTML = `<span class="status-badge" style="background:#3b82f6;padding:2px 6px;border-radius:4px;font-size:0.7rem;color:#fff;">搜寻功能..</span> <code style="color:#a5f3fc">${rm.rm_sku}</code>`;
+                        statusEl.innerHTML = `<span class="status-badge" style="background:#3b82f6;padding:2px 6px;border-radius:4px;font-size:0.7rem;color:#fff;">Function Search..</span> <code style="color:#a5f3fc">${rm.rm_sku}</code>`;
                         const sugRes = await fetch('/api/suggest-alternatives', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         if(!sugRes.ok) throw new Error("Suggest fail");
 
                         // 2. Screen Compliance
-                        statusEl.innerHTML = `<span class="status-badge" style="background:#f59e0b;padding:2px 6px;border-radius:4px;font-size:0.7rem;color:#fff;">深度审查..</span> <code style="color:#a5f3fc">${rm.rm_sku}</code>`;
+                        statusEl.innerHTML = `<span class="status-badge" style="background:#f59e0b;padding:2px 6px;border-radius:4px;font-size:0.7rem;color:#fff;">Deep Audit..</span> <code style="color:#a5f3fc">${rm.rm_sku}</code>`;
                         const compRes = await fetch('/api/screen-compliance', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         rmReport.suggestion = sugJson.suggestion || "";
                         rmReport.report = reportText;
                         
-                        const approvedSectionMatches = [...reportText.matchAll(/(?:最终合规放行推荐|🏆)[\s\S]*?(?=###|$)/g)];
+                        const approvedSectionMatches = [...reportText.matchAll(/(?:Final Compliant Approvals|🏆)[\s\S]*?(?=###|$)/g)];
                         const alts = [];
                         if (approvedSectionMatches.length > 0) {
                             const lines = approvedSectionMatches[0][0].split('\n');
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 const skuMatch = line.match(/(RM-[A-Za-z0-9_-]+)/);
                                 if (skuMatch) {
                                     let matchedSku = skuMatch[1];
-                                    let suppNames = rm.current_suppliers.length > 0 ? rm.current_suppliers : ['默认原供应商'];
+                                    let suppNames = rm.current_suppliers.length > 0 ? rm.current_suppliers : ['Default Original Supplier'];
                                     let validInDb = true;
 
                                     if (dbData && dbData.Product) {
@@ -189,14 +189,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                             }
                         }
                         
-                        compliantMap[rm.rm_sku] = alts.length > 0 ? alts : [{sku: rm.rm_sku, suppliers: rm.current_suppliers.length > 0 ? rm.current_suppliers : ['默认原供应商']}];
+                        // Always include the original RM itself as the first candidate
+                        // so the greedy algorithm can always see the original supplier as an option
+                        const originalEntry = { sku: rm.rm_sku, suppliers: rm.current_suppliers.length > 0 ? rm.current_suppliers : ['Default Original Supplier'] };
+                        const altsWithoutOriginal = alts.filter(a => a.sku !== rm.rm_sku);
+                        compliantMap[rm.rm_sku] = [originalEntry, ...altsWithoutOriginal];
                         detailedReports.push(rmReport);
                         
-                        statusEl.innerHTML = `<span class="status-badge" style="background:#10b981;padding:2px 6px;border-radius:4px;font-size:0.7rem;color:#fff;">✅ 完成验证</span> <code style="color:#a5f3fc">${rm.rm_sku}</code> <span style="color:#8b8d96;margin-left:0.5rem">符合要求: ${compliantMap[rm.rm_sku].length} 项</span>`;
+                        statusEl.innerHTML = `<span class="status-badge" style="background:#10b981;padding:2px 6px;border-radius:4px;font-size:0.7rem;color:#fff;">✅ Validation Complete</span> <code style="color:#a5f3fc">${rm.rm_sku}</code> <span style="color:#8b8d96;margin-left:0.5rem">Compliant: ${compliantMap[rm.rm_sku].length} items</span>`;
 
                     } catch (e) {
-                        statusEl.innerHTML = `<span class="status-badge" style="background:#ef4444;padding:2px 6px;border-radius:4px;font-size:0.7rem;color:#fff;">❌ 截断失败(可重试)</span> <code style="color:#a5f3fc">${rm.rm_sku}</code>`;
-                        compliantMap[rm.rm_sku] = [{sku: rm.rm_sku, suppliers: rm.current_suppliers.length > 0 ? rm.current_suppliers : ['默认原供应商']}]; // fallback
+                        statusEl.innerHTML = `<span class="status-badge" style="background:#ef4444;padding:2px 6px;border-radius:4px;font-size:0.7rem;color:#fff;">❌ Truncation Failed (Retryable)</span> <code style="color:#a5f3fc">${rm.rm_sku}</code>`;
+                        compliantMap[rm.rm_sku] = [{sku: rm.rm_sku, suppliers: rm.current_suppliers.length > 0 ? rm.current_suppliers : ['Default Original Supplier']}]; // fallback to original
                         rmReport.report += `\n\n**Error:** ${e.message}`;
                         detailedReports.push(rmReport);
                     }
@@ -218,7 +222,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 // Reduce Phase
                 const finalArea = document.getElementById('final-consolidation-area');
-                finalArea.innerHTML = '<div class="ai-loader" style="margin-top:2rem;"><i class="uil uil-spinner-alt ai-spin"></i> 正在合并全公司矩阵...</div>';
+                finalArea.innerHTML = '<div class="ai-loader" style="margin-top:2rem;"><i class="uil uil-spinner-alt ai-spin"></i> Merging entire company matrix...</div>';
                 
                 const res = await fetch('/api/compute-consolidation', {
                     method: 'POST',
@@ -231,7 +235,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // ── Render ────────────
                 const rmRows = json.rm_matrix.map(rm => {
                     const altHtml = rm.alternatives.length > 0
-                        ? rm.alternatives.map(a => `<div style="margin-bottom:0.2rem;"><code style="font-size:0.75rem">${a.sku}</code> <span style="font-size:0.75rem;color:#8b8d96;">(供货: ${a.suppliers.join(', ')})</span></div>`).join('')
+                        ? rm.alternatives.map(a => `<div style="margin-bottom:0.2rem;"><code style="font-size:0.75rem">${a.sku}</code> <span style="font-size:0.75rem;color:#8b8d96;">(Supplied by: ${a.suppliers.join(', ')})</span></div>`).join('')
                         : '-';
                     return `<tr>
                         <td><code style="font-size:0.78rem;color:#a5f3fc">${rm.rm_sku}</code></td>
@@ -256,7 +260,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <div class="greedy-step">
                                 <span class="greedy-num">${i+1}</span>
                                 <strong>${g.supplier}</strong>
-                                <span style="color:#8b8d96;font-size:0.85rem">→ 排他覆盖 ${g.covers.length} 种：
+                                <span style="color:#8b8d96;font-size:0.85rem">→ Exclusive Coverage: ${g.covers.length} types:
                                     ${g.covers.map(sku => `<code>${sku}</code>`).join('、')}
                                 </span>
                             </div>
@@ -275,27 +279,27 @@ document.addEventListener('DOMContentLoaded', async () => {
                 finalArea.innerHTML = `
                     <div class="consolidation-card" style="margin-top:1rem;border-top:1px solid rgba(255,255,255,0.1);padding-top:2rem;">
                         <h2 style="color:#fbbf24;margin-bottom:1.5rem">
-                            🏭 ${json.company} — 全链条深度合并报告
+                            🏭 ${json.company}  — Full Chain Deep Consolidation Report
                         </h2>
 
-                        <h3 style="color:#10b981;margin-bottom:0.75rem">🏆 全严格合规级可购池</h3>
+                        <h3 style="color:#10b981;margin-bottom:0.75rem">🏆 Strict Compliant Sourcing Pool</h3>
                         <div style="overflow-x:auto;margin-bottom:2rem">
                             <table class="matrix-table">
-                                <thead><tr><th>原物料核心需求 (SKU)</th><th>基础材料体系</th><th>完全合格的可平替采购项</th></tr></thead>
+                                <thead><tr><th>Core Raw Material Requirement (SKU)</th><th>Base Material System</th><th>Fully Qualified Drop-in Substitutes</th></tr></thead>
                                 <tbody>${rmRows}</tbody>
                             </table>
                         </div>
 
-                        <h3 style="color:#38bdf8;margin-bottom:0.75rem">🎯 智能采买方案（多维度选择）</h3>
+                        <h3 style="color:#38bdf8;margin-bottom:0.75rem">🎯 Intelligent Purchasing Plans (Multi-Dimensional Choices)</h3>
                         <p style="color:#8b8d96;font-size:0.85rem;margin-bottom:1rem">
-                            系统基于合规源池并采用排他贪心算法，为您自动演算出如下 ${json.purchasing_plans.length} 种采购策略：
+                            Based on the compliant sourcing pool and an exclusive greedy algorithm, the system automatically calculated the following ${json.purchasing_plans.length} purchasing strategies:
                         </p>
                         <div style="margin-bottom:2rem">${plansHtml}</div>
                         
-                        <h3 style="color:#a78bfa;margin-bottom:0.75rem">📊 合规库内供应商综合硬广覆盖排名</h3>
+                        <h3 style="color:#a78bfa;margin-bottom:0.75rem">📊 Supplier Comprehensive Coverage Ranking in Compliant Database</h3>
                         <div style="overflow-x:auto;margin-bottom:2rem">
                             <table class="matrix-table">
-                                <thead><tr><th>推荐位序</th><th>供应商抬头</th><th>完全满足项总数</th><th>精准涉及 SKU</th></tr></thead>
+                                <thead><tr><th>Rank</th><th>Supplier Name</th><th>Total Items Fully Satisfied</th><th>Specific SKUs Involved</th></tr></thead>
                                 <tbody>${rankRows}</tbody>
                             </table>
                         </div>
@@ -305,8 +309,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // ── Append Per-Material Detailed Reports ──
                 if (detailedReports.length > 0) {
                     let reportsHtml = `<div style="margin-top: 3rem; border-top: 2px dashed rgba(255,255,255,0.2); padding-top: 2rem;">
-                        <h2 style="color:#d946ef;margin-bottom:1.5rem">📑 各物料独立尽职调查报告 (AI)</h2>
-                        <p style="color:#8b8d96;font-size:0.85rem;margin-bottom:2rem">以下为每种原材料经过独立的大模型查询与合规审查环节留存的原始证据链：</p>
+                        <h2 style="color:#d946ef;margin-bottom:1.5rem">📑 Individual Material Due Diligence Reports (AI)</h2>
+                        <p style="color:#8b8d96;font-size:0.85rem;margin-bottom:2rem">Below is the original chain of evidence retained for each raw material after undergoing independent LLM querying and compliance screening:</p>
                     `;
 
                     detailedReports.forEach(dr => {
@@ -317,12 +321,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </h3>
                             <div class="markdown-body" style="font-size: 0.85rem;">
                                 <div style="margin-bottom: 2rem;">
-                                    <h4 style="color:#3b82f6;">🔍 [阶段一] 成分寻源与功能匹配</h4>
-                                    ${marked.parse(dr.suggestion || "无响应数据")}
+                                    <h4 style="color:#3b82f6;">🔍 [Phase 1] Component Sourcing & Functional Matching</h4>
+                                    ${marked.parse(dr.suggestion || "No response data")}
                                 </div>
                                 <div>
-                                    <h4 style="color:#f59e0b;">🛡️ [阶段二] 强制合规审查与供应商筛选</h4>
-                                    ${marked.parse(dr.report || "无响应数据")}
+                                    <h4 style="color:#f59e0b;">🛡️ [Phase 2] Mandatory Compliance Screening & Supplier Filtering</h4>
+                                    ${marked.parse(dr.report || "No response data")}
                                 </div>
                             </div>
                         </div>`;
@@ -336,7 +340,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 resultDiv.innerHTML += `<div style="color:#ffb74d;margin-top:1rem;">Error: ${err.message}</div>`;
             } finally {
                 btn.disabled = false;
-                btn.textContent = `🔗 全公司原材料 × 供应商整合分析（${companyName}）`;
+                btn.textContent = `🔗 Full Company Raw Materials × Supplier Consolidation Analysis（${companyName}）`;
             }
         });
     });
@@ -516,16 +520,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 const scoringWrapper = document.createElement('div');
                                 scoringWrapper.innerHTML = `
                                     <div class="quantity-input-group">
-                                        <label>📦 需求量</label>
+                                        <label>📦 Demand</label>
                                         <input type="number" class="qty-input" id="qty-input-${materialId}" 
-                                               placeholder="千克 / 月" min="1" value="100" />
+                                               placeholder="kg / month" min="1" value="100" />
                                         <button class="score-btn" id="score-btn-${materialId}">
-                                            🏆 开始最优解评选
+                                            🏆 Start Optimal Solution Selection
                                         </button>
                                     </div>
                                     <div class="scoring-results-container hidden" id="scoring-results-${materialId}">
                                         <div class="ai-loader scoring-loader hidden">
-                                            <i class="uil uil-spinner-alt ai-spin"></i> 正在查询价格、计算合并分、生成排名表…
+                                            <i class="uil uil-spinner-alt ai-spin"></i> Querying prices, calculating consolidation scores, generating ranking lists...
                                         </div>
                                         <div class="scoring-content markdown-body"></div>
                                     </div>

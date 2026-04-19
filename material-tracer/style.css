@@ -604,3 +604,92 @@ select option {
     flex-shrink: 0;
 }
 
+/* ── Markdown Body Rendering ─────────────────────────────── */
+.markdown-body {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    overflow-x: hidden;
+}
+
+/* All links inside markdown reports */
+.markdown-body a {
+    color: #38bdf8;
+    text-decoration: none;
+    font-size: 0.72rem;          /* smaller citation link text */
+    border-bottom: 1px dotted rgba(56, 189, 248, 0.4);
+    transition: color 0.2s ease;
+    word-break: break-all;       /* break long URLs */
+    overflow-wrap: break-word;
+}
+
+.markdown-body a:hover {
+    color: #7dd3fc;
+    border-bottom-color: #7dd3fc;
+}
+
+/* Inline citation superscripts like [1](url) */
+.markdown-body sup a,
+.markdown-body a[href^="http"] {
+    font-size: 0.68rem;
+    vertical-align: super;
+    line-height: 0;
+    padding: 0 2px;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 3px;
+    border-bottom: none;
+}
+
+/* Block-level citation lines (> 🔗 ...) */
+.markdown-body blockquote {
+    border-left: 2px solid rgba(56, 189, 248, 0.3);
+    padding: 0.3rem 0.75rem;
+    margin: 0.25rem 0;
+    background: rgba(56, 189, 248, 0.04);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.markdown-body blockquote a {
+    font-size: 0.7rem;
+    color: #38bdf8;
+}
+
+/* Markdown headings */
+.markdown-body h3 {
+    font-size: 0.95rem;
+    color: #a78bfa;
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.markdown-body h4 {
+    font-size: 0.88rem;
+    color: #7dd3fc;
+    margin-top: 0.75rem;
+    margin-bottom: 0.3rem;
+}
+
+.markdown-body p {
+    color: #c4c6d0;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+}
+
+.markdown-body ul, .markdown-body ol {
+    margin-left: 1.5rem;
+    color: #c4c6d0;
+    line-height: 1.7;
+}
+
+.markdown-body strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Prevent glass cards from clipping overflowing content */
+.consolidation-card {
+    overflow: hidden;
+}
