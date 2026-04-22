@@ -1,0 +1,711 @@
+{
+  "RM-C4-calcium-c77f1de7": {
+    "sku": "RM-C4-calcium-c77f1de7",
+    "compound_name": "calcium",
+    "enriched_at": "2026-04-19T09:23:11.203516",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5460341,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5460341",
+    "official_name": "calcium",
+    "molecular_formula": "Ca",
+    "molecular_weight": "40.08",
+    "synonyms": [
+      "CALCIUM",
+      "7440-70-2",
+      "Calcium, elemental",
+      "SY7Q814VUP",
+      "Calcium element"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C4-magnesium-7058dcb8": {
+    "sku": "RM-C4-magnesium-7058dcb8",
+    "compound_name": "magnesium",
+    "enriched_at": "2026-04-19T09:23:39.353404",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5462224,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5462224",
+    "official_name": "magnesium",
+    "molecular_formula": "Mg",
+    "molecular_weight": "24.305",
+    "synonyms": [
+      "MAGNESIUM",
+      "7439-95-4",
+      "Magnesium sheet",
+      "Magnesium powdered",
+      "Magnesium metallicum"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C4-potassium-4fd2e03c": {
+    "sku": "RM-C4-potassium-4fd2e03c",
+    "compound_name": "potassium",
+    "enriched_at": "2026-04-19T09:24:15.521977",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5462222,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5462222",
+    "official_name": "potassium",
+    "molecular_formula": "K",
+    "molecular_weight": "39.0983",
+    "synonyms": [
+      "POTASSIUM",
+      "7440-09-7",
+      "Kalium",
+      "Potassium, metal",
+      "Potassium metal"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C56-calcium-lactate-gluconate-44d08e4d": {
+    "sku": "RM-C56-calcium-lactate-gluconate-44d08e4d",
+    "compound_name": "calcium lactate gluconate",
+    "enriched_at": "2026-04-19T09:39:30.655332",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 91663257,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/91663257",
+    "official_name": "pentacalcium;lactate;tetrakis((2R,3S,4R,5R)-2,3,4,5,6-pentahydroxyhexanoate);dihydrate",
+    "molecular_formula": "C42H78Ca5O48",
+    "molecular_weight": "1551.4",
+    "synonyms": [
+      "472LWJ3Y9N",
+      "calcium gluconolactate",
+      "UNII-472LWJ3Y9N",
+      "Calcium (as lactate gluconate)",
+      "DTXSID60894841"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C25-calcium-citrate-02aa8da0": {
+    "sku": "RM-C25-calcium-citrate-02aa8da0",
+    "compound_name": "calcium citrate",
+    "enriched_at": "2026-04-19T09:39:30.680325",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 13136,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/13136",
+    "official_name": "tricalcium dicitrate",
+    "molecular_formula": "C12H10Ca3O14",
+    "molecular_weight": "498.4",
+    "synonyms": [
+      "Calcium citrate",
+      "813-94-5",
+      "Tricalcium dicitrate",
+      "Acicontral",
+      "TRICALCIUM CITRATE"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C51-calcium-citrate-05013377": {
+    "sku": "RM-C51-calcium-citrate-05013377",
+    "compound_name": "calcium citrate",
+    "enriched_at": "2026-04-19T09:39:30.688324",
+    "enrichment_source": "stub",
+    "note": "PubChem lookup failed — likely a synthetic/generic SKU name. AI inference applies."
+  },
+  "RM-C32-calcium-citrate-2f9465c9": {
+    "sku": "RM-C32-calcium-citrate-2f9465c9",
+    "compound_name": "calcium citrate",
+    "enriched_at": "2026-04-19T09:39:30.725554",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 13136,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/13136",
+    "official_name": "tricalcium dicitrate",
+    "molecular_formula": "C12H10Ca3O14",
+    "molecular_weight": "498.4",
+    "synonyms": [
+      "Calcium citrate",
+      "813-94-5",
+      "Tricalcium dicitrate",
+      "Acicontral",
+      "TRICALCIUM CITRATE"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C1-calcium-citrate-05c28cc3": {
+    "sku": "RM-C1-calcium-citrate-05c28cc3",
+    "compound_name": "calcium citrate",
+    "enriched_at": "2026-04-19T09:39:30.731993",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 13136,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/13136",
+    "official_name": "tricalcium dicitrate",
+    "molecular_formula": "C12H10Ca3O14",
+    "molecular_weight": "498.4",
+    "synonyms": [
+      "Calcium citrate",
+      "813-94-5",
+      "Tricalcium dicitrate",
+      "Acicontral",
+      "TRICALCIUM CITRATE"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C12-calcium-carbonate-7423a5f4": {
+    "sku": "RM-C12-calcium-carbonate-7423a5f4",
+    "compound_name": "calcium carbonate",
+    "enriched_at": "2026-04-19T09:39:30.812643",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 10112,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/10112",
+    "official_name": "calcium carbonate",
+    "molecular_formula": "CCaO3",
+    "molecular_weight": "100.09",
+    "synonyms": [
+      "CALCIUM CARBONATE",
+      "471-34-1",
+      "Aeromatt",
+      "Calcium carbonate (1:1)",
+      "Carbonic acid calcium salt (1:1)"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C17-calcium-carbonate-164af619": {
+    "sku": "RM-C17-calcium-carbonate-164af619",
+    "compound_name": "calcium carbonate",
+    "enriched_at": "2026-04-19T09:39:31.759847",
+    "enrichment_source": "stub",
+    "note": "PubChem lookup failed — likely a synthetic/generic SKU name. AI inference applies."
+  },
+  "RM-C29-dibasic-calcium-phosphate-dihydrate-ef3ab6b0": {
+    "sku": "RM-C29-dibasic-calcium-phosphate-dihydrate-ef3ab6b0",
+    "compound_name": "dibasic calcium phosphate dihydrate",
+    "enriched_at": "2026-04-19T09:39:31.823806",
+    "enrichment_source": "stub",
+    "note": "PubChem lookup failed — likely a synthetic/generic SKU name. AI inference applies."
+  },
+  "RM-C17-dicalcium-phosphate-a5ed9ed7": {
+    "sku": "RM-C17-dicalcium-phosphate-a5ed9ed7",
+    "compound_name": "dicalcium phosphate",
+    "enriched_at": "2026-04-19T09:39:31.847903",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 24441,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/24441",
+    "official_name": "calcium hydrogen phosphate",
+    "molecular_formula": "CaHO4P",
+    "molecular_weight": "136.06",
+    "synonyms": [
+      "7757-93-9",
+      "CALCIUM HYDROGEN PHOSPHATE",
+      "Calcium phosphate dibasic",
+      "calcium hydrogenphosphate",
+      "Dicalcium phosphate"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C30-calcium-carbonate-dd9f47aa": {
+    "sku": "RM-C30-calcium-carbonate-dd9f47aa",
+    "compound_name": "calcium carbonate",
+    "enriched_at": "2026-04-19T09:39:32.054529",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 10112,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/10112",
+    "official_name": "calcium carbonate",
+    "molecular_formula": "CCaO3",
+    "molecular_weight": "100.09",
+    "synonyms": [
+      "CALCIUM CARBONATE",
+      "471-34-1",
+      "Aeromatt",
+      "Calcium carbonate (1:1)",
+      "Carbonic acid calcium salt (1:1)"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C11-magnesium-glycinate-309625e9": {
+    "sku": "RM-C11-magnesium-glycinate-309625e9",
+    "compound_name": "magnesium glycinate",
+    "enriched_at": "2026-04-19T09:39:53.965701",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 84645,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/84645",
+    "official_name": "magnesium bis(2-aminoacetate)",
+    "molecular_formula": "C4H8MgN2O4",
+    "molecular_weight": "172.42",
+    "synonyms": [
+      "MAGNESIUM GLYCINATE",
+      "14783-68-7",
+      "Bis(glycinato-N,O)magnesium",
+      "Magnesium diglycinate",
+      "IFN18A4Y6B"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C30-magnesium-citrate-31b1d4da": {
+    "sku": "RM-C30-magnesium-citrate-31b1d4da",
+    "compound_name": "magnesium citrate",
+    "enriched_at": "2026-04-19T09:39:54.003276",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 6099959,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/6099959",
+    "official_name": "trimagnesium dicitrate",
+    "molecular_formula": "C12H10Mg3O14",
+    "molecular_weight": "451.12",
+    "synonyms": [
+      "Trimagnesium dicitrate",
+      "MAGNESIUM CITRATE",
+      "3344-18-1",
+      "Trimagnesium citrate",
+      "magnesium dicitrate"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C51-magnesium-citrate-cab42be9": {
+    "sku": "RM-C51-magnesium-citrate-cab42be9",
+    "compound_name": "magnesium citrate",
+    "enriched_at": "2026-04-19T09:39:54.139778",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 6099959,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/6099959",
+    "official_name": "trimagnesium dicitrate",
+    "molecular_formula": "C12H10Mg3O14",
+    "molecular_weight": "451.12",
+    "synonyms": [
+      "Trimagnesium dicitrate",
+      "MAGNESIUM CITRATE",
+      "3344-18-1",
+      "Trimagnesium citrate",
+      "magnesium dicitrate"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C22-magnesium-citrate-086264b4": {
+    "sku": "RM-C22-magnesium-citrate-086264b4",
+    "compound_name": "magnesium citrate",
+    "enriched_at": "2026-04-19T09:39:54.211862",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 6099959,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/6099959",
+    "official_name": "trimagnesium dicitrate",
+    "molecular_formula": "C12H10Mg3O14",
+    "molecular_weight": "451.12",
+    "synonyms": [
+      "Trimagnesium dicitrate",
+      "MAGNESIUM CITRATE",
+      "3344-18-1",
+      "Trimagnesium citrate",
+      "magnesium dicitrate"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C40-magnesium-citrate-a5181724": {
+    "sku": "RM-C40-magnesium-citrate-a5181724",
+    "compound_name": "magnesium citrate",
+    "enriched_at": "2026-04-19T09:39:54.378884",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 6099959,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/6099959",
+    "official_name": "trimagnesium dicitrate",
+    "molecular_formula": "C12H10Mg3O14",
+    "molecular_weight": "451.12",
+    "synonyms": [
+      "Trimagnesium dicitrate",
+      "MAGNESIUM CITRATE",
+      "3344-18-1",
+      "Trimagnesium citrate",
+      "magnesium dicitrate"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C28-magnesium-citrate-d364c220": {
+    "sku": "RM-C28-magnesium-citrate-d364c220",
+    "compound_name": "magnesium citrate",
+    "enriched_at": "2026-04-19T09:39:54.400183",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 6099959,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/6099959",
+    "official_name": "trimagnesium dicitrate",
+    "molecular_formula": "C12H10Mg3O14",
+    "molecular_weight": "451.12",
+    "synonyms": [
+      "Trimagnesium dicitrate",
+      "MAGNESIUM CITRATE",
+      "3344-18-1",
+      "Trimagnesium citrate",
+      "magnesium dicitrate"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C32-aquamin-mg-soluble-2229f585": {
+    "sku": "RM-C32-aquamin-mg-soluble-2229f585",
+    "compound_name": "aquamin mg soluble",
+    "enriched_at": "2026-04-19T09:39:54.751946",
+    "enrichment_source": "stub",
+    "note": "PubChem lookup failed — likely a synthetic/generic SKU name. AI inference applies."
+  },
+  "RM-C30-magnesium-bisglycinate-c6e583c4": {
+    "sku": "RM-C30-magnesium-bisglycinate-c6e583c4",
+    "compound_name": "magnesium bisglycinate",
+    "enriched_at": "2026-04-19T09:39:55.053100",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 84645,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/84645",
+    "official_name": "magnesium bis(2-aminoacetate)",
+    "molecular_formula": "C4H8MgN2O4",
+    "molecular_weight": "172.42",
+    "synonyms": [
+      "MAGNESIUM GLYCINATE",
+      "14783-68-7",
+      "Bis(glycinato-N,O)magnesium",
+      "Magnesium diglycinate",
+      "IFN18A4Y6B"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C22-magnesium-malate-fbb003be": {
+    "sku": "RM-C22-magnesium-malate-fbb003be",
+    "compound_name": "magnesium malate",
+    "enriched_at": "2026-04-19T09:39:55.094253",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 164748,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/164748",
+    "official_name": "magnesium 2-hydroxysuccinate",
+    "molecular_formula": "C4H4MgO5",
+    "molecular_weight": "156.38",
+    "synonyms": [
+      "Magnesium malate",
+      "869-06-7",
+      "LA9X9UJA2Z",
+      "UNII-LA9X9UJA2Z",
+      "DTXSID70893860"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C26-magnesium-malate-98ccabb5": {
+    "sku": "RM-C26-magnesium-malate-98ccabb5",
+    "compound_name": "magnesium malate",
+    "enriched_at": "2026-04-19T09:39:55.300049",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 164748,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/164748",
+    "official_name": "magnesium 2-hydroxysuccinate",
+    "molecular_formula": "C4H4MgO5",
+    "molecular_weight": "156.38",
+    "synonyms": [
+      "Magnesium malate",
+      "869-06-7",
+      "LA9X9UJA2Z",
+      "UNII-LA9X9UJA2Z",
+      "DTXSID70893860"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C14-potassium-e9dad6ca": {
+    "sku": "RM-C14-potassium-e9dad6ca",
+    "compound_name": "potassium",
+    "enriched_at": "2026-04-19T09:40:21.387136",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5462222,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5462222",
+    "official_name": "potassium",
+    "molecular_formula": "K",
+    "molecular_weight": "39.0983",
+    "synonyms": [
+      "POTASSIUM",
+      "7440-09-7",
+      "Kalium",
+      "Potassium, metal",
+      "Potassium metal"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C7-potassium-c3344ceb": {
+    "sku": "RM-C7-potassium-c3344ceb",
+    "compound_name": "potassium",
+    "enriched_at": "2026-04-19T09:40:21.397145",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5462222,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5462222",
+    "official_name": "potassium",
+    "molecular_formula": "K",
+    "molecular_weight": "39.0983",
+    "synonyms": [
+      "POTASSIUM",
+      "7440-09-7",
+      "Kalium",
+      "Potassium, metal",
+      "Potassium metal"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C42-potassium-73c4631d": {
+    "sku": "RM-C42-potassium-73c4631d",
+    "compound_name": "potassium",
+    "enriched_at": "2026-04-19T09:40:21.404893",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5462222,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5462222",
+    "official_name": "potassium",
+    "molecular_formula": "K",
+    "molecular_weight": "39.0983",
+    "synonyms": [
+      "POTASSIUM",
+      "7440-09-7",
+      "Kalium",
+      "Potassium, metal",
+      "Potassium metal"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C3-potassium-a7e6389c": {
+    "sku": "RM-C3-potassium-a7e6389c",
+    "compound_name": "potassium",
+    "enriched_at": "2026-04-19T09:40:21.416207",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5462222,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5462222",
+    "official_name": "potassium",
+    "molecular_formula": "K",
+    "molecular_weight": "39.0983",
+    "synonyms": [
+      "POTASSIUM",
+      "7440-09-7",
+      "Kalium",
+      "Potassium, metal",
+      "Potassium metal"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C10-potassium-4334e301": {
+    "sku": "RM-C10-potassium-4334e301",
+    "compound_name": "potassium",
+    "enriched_at": "2026-04-19T09:40:21.451839",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5462222,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5462222",
+    "official_name": "potassium",
+    "molecular_formula": "K",
+    "molecular_weight": "39.0983",
+    "synonyms": [
+      "POTASSIUM",
+      "7440-09-7",
+      "Kalium",
+      "Potassium, metal",
+      "Potassium metal"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C16-potassium-3356f222": {
+    "sku": "RM-C16-potassium-3356f222",
+    "compound_name": "potassium",
+    "enriched_at": "2026-04-19T09:40:21.464397",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5462222,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5462222",
+    "official_name": "potassium",
+    "molecular_formula": "K",
+    "molecular_weight": "39.0983",
+    "synonyms": [
+      "POTASSIUM",
+      "7440-09-7",
+      "Kalium",
+      "Potassium, metal",
+      "Potassium metal"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C46-potassium-2f0ec99d": {
+    "sku": "RM-C46-potassium-2f0ec99d",
+    "compound_name": "potassium",
+    "enriched_at": "2026-04-19T09:40:21.949386",
+    "enrichment_source": "stub",
+    "note": "PubChem lookup failed — likely a synthetic/generic SKU name. AI inference applies."
+  },
+  "RM-C27-potassium-citrate-b91db2ed": {
+    "sku": "RM-C27-potassium-citrate-b91db2ed",
+    "compound_name": "potassium citrate",
+    "enriched_at": "2026-04-19T09:40:21.967349",
+    "enrichment_source": "stub",
+    "note": "PubChem lookup failed — likely a synthetic/generic SKU name. AI inference applies."
+  },
+  "RM-C55-potassium-aaed46d8": {
+    "sku": "RM-C55-potassium-aaed46d8",
+    "compound_name": "potassium",
+    "enriched_at": "2026-04-19T09:40:21.970841",
+    "enrichment_source": "stub",
+    "note": "PubChem lookup failed — likely a synthetic/generic SKU name. AI inference applies."
+  },
+  "RM-C57-potassium-f8472195": {
+    "sku": "RM-C57-potassium-f8472195",
+    "compound_name": "potassium",
+    "enriched_at": "2026-04-19T09:40:22.431435",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5462222,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5462222",
+    "official_name": "potassium",
+    "molecular_formula": "K",
+    "molecular_weight": "39.0983",
+    "synonyms": [
+      "POTASSIUM",
+      "7440-09-7",
+      "Kalium",
+      "Potassium, metal",
+      "Potassium metal"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C51-vitamin-c-calcium-ascorbate-cc36787c": {
+    "sku": "RM-C51-vitamin-c-calcium-ascorbate-cc36787c",
+    "compound_name": "vitamin c calcium ascorbate",
+    "enriched_at": "2026-04-19T09:44:02.504806",
+    "enrichment_source": "stub",
+    "note": "PubChem lookup failed — likely a synthetic/generic SKU name. AI inference applies."
+  },
+  "RM-C16-calcium-6951db19": {
+    "sku": "RM-C16-calcium-6951db19",
+    "compound_name": "calcium",
+    "enriched_at": "2026-04-19T09:44:03.220560",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5460341,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5460341",
+    "official_name": "calcium",
+    "molecular_formula": "Ca",
+    "molecular_weight": "40.08",
+    "synonyms": [
+      "CALCIUM",
+      "7440-70-2",
+      "Calcium, elemental",
+      "SY7Q814VUP",
+      "Calcium element"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C42-calcium-7730815b": {
+    "sku": "RM-C42-calcium-7730815b",
+    "compound_name": "calcium",
+    "enriched_at": "2026-04-19T09:44:03.235461",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5460341,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5460341",
+    "official_name": "calcium",
+    "molecular_formula": "Ca",
+    "molecular_weight": "40.08",
+    "synonyms": [
+      "CALCIUM",
+      "7440-70-2",
+      "Calcium, elemental",
+      "SY7Q814VUP",
+      "Calcium element"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C57-calcium-c4d04740": {
+    "sku": "RM-C57-calcium-c4d04740",
+    "compound_name": "calcium",
+    "enriched_at": "2026-04-19T09:44:03.238552",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5460341,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5460341",
+    "official_name": "calcium",
+    "molecular_formula": "Ca",
+    "molecular_weight": "40.08",
+    "synonyms": [
+      "CALCIUM",
+      "7440-70-2",
+      "Calcium, elemental",
+      "SY7Q814VUP",
+      "Calcium element"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C56-calcium-ascorbate-fca157d3": {
+    "sku": "RM-C56-calcium-ascorbate-fca157d3",
+    "compound_name": "calcium ascorbate",
+    "enriched_at": "2026-04-19T09:44:03.366449",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 54740489,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/54740489",
+    "official_name": "calcium bis((2R)-2-[(1S)-1,2-dihydroxyethyl]-3-hydroxy-5-keto-2H-furan-4-olate)",
+    "molecular_formula": "C12H14CaO12",
+    "molecular_weight": "390.31",
+    "synonyms": [
+      "CALCIUM ASCORBATE",
+      "Ascorbic acid calcium salt",
+      "Calcium diascorbate",
+      "5743-27-1",
+      "Calcium ascorbate anhydrous"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C57-magnesium-l-threonate-magtein-f0269f1e": {
+    "sku": "RM-C57-magnesium-l-threonate-magtein-f0269f1e",
+    "compound_name": "magnesium l threonate magtein",
+    "enriched_at": "2026-04-19T09:44:20.313338",
+    "enrichment_source": "stub",
+    "note": "PubChem lookup failed — likely a synthetic/generic SKU name. AI inference applies."
+  },
+  "RM-C16-magnesium-e731ae15": {
+    "sku": "RM-C16-magnesium-e731ae15",
+    "compound_name": "magnesium",
+    "enriched_at": "2026-04-19T09:44:20.951460",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 5462224,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/5462224",
+    "official_name": "magnesium",
+    "molecular_formula": "Mg",
+    "molecular_weight": "24.305",
+    "synonyms": [
+      "MAGNESIUM",
+      "7439-95-4",
+      "Magnesium sheet",
+      "Magnesium powdered",
+      "Magnesium metallicum"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C52-magnesium-taurate-a92bc022": {
+    "sku": "RM-C52-magnesium-taurate-a92bc022",
+    "compound_name": "magnesium taurate",
+    "enriched_at": "2026-04-19T09:44:20.977166",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 13343447,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/13343447",
+    "official_name": "magnesium bis(2-aminoethanesulfonate)",
+    "molecular_formula": "C4H12MgN2O6S2",
+    "molecular_weight": "272.6",
+    "synonyms": [
+      "Magnesium taurate",
+      "UNII-RCM1N3D968",
+      "RCM1N3D968",
+      "Ethanesulfonic acid, 2-amino-, magnesium salt (2:1)",
+      "MAGNESIUM TAURATE [WHO-DD]"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C35-magnesium-carbonate-192d24ea": {
+    "sku": "RM-C35-magnesium-carbonate-192d24ea",
+    "compound_name": "magnesium carbonate",
+    "enriched_at": "2026-04-19T09:44:21.110099",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 11029,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/11029",
+    "official_name": "magnesium carbonate",
+    "molecular_formula": "CMgO3",
+    "molecular_weight": "84.31",
+    "synonyms": [
+      "MAGNESIUM CARBONATE",
+      "546-93-0",
+      "Magnesite",
+      "Magnesium carbonate anhydrous",
+      "Kimboshi"
+    ],
+    "source": "pubchem"
+  },
+  "RM-C52-magnesium-aspartate-587ada69": {
+    "sku": "RM-C52-magnesium-aspartate-587ada69",
+    "compound_name": "magnesium aspartate",
+    "enriched_at": "2026-04-19T09:44:21.157727",
+    "enrichment_source": "pubchem",
+    "pubchem_cid": 56841975,
+    "pubchem_url": "https://pubchem.ncbi.nlm.nih.gov/compound/56841975",
+    "official_name": "magnesium;bis((2S)-2-amino-4-hydroxy-4-keto-butyrate);tetrahydrate",
+    "molecular_formula": "C8H20MgN2O12",
+    "molecular_weight": "360.56",
+    "synonyms": [
+      "Magnesium aspartate",
+      "Magnesium aspartate tetrahydrate",
+      "R17X820ROL",
+      "Aspartic acid, magnesium salt",
+      "(+)-MAGNESIUM ASPARTATE TETRAHYDRATE"
+    ],
+    "source": "pubchem"
+  }
+}
